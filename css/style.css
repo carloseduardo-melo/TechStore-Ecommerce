@@ -1,0 +1,26 @@
+/* Arquivo CSS Inicial - Tech Store 
+   Configurações básicas de reset para as próximas etapas
+*/
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: sans-serif;
+    line-height: 1.6;
+    padding: 20px;
+}
+
+/* Espaçamentos provisórios para facilitar a leitura da estrutura atual */
+header, nav, main, footer {
+    margin-bottom: 20px;
+    padding: 10px;
+    border: 1px dashed #ccc; /* Borda provisória para visualizar as seções */
+}
+
+section {
+    margin-bottom: 20px;
+}
