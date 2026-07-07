@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>O Seu Carrinho - Tech Store</title>
+    
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+    <header>
+        <h1>Tech Store</h1>
+        <p>Alta performance em eletrônicos e hardware</p>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="../index.html">Início</a></li>
+            <li><a href="catalogo-produtos.html">Catálogo de Produtos</a></li>
+            <li><a href="carrinho.html">Meu Carrinho</a></li>
+            <li><a href="checkout.html">Finalizar Compra</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <section id="conteudo-carrinho">
+            <h2>O Seu Carrinho de Compras</h2>
+            <p>Confira os itens selecionados antes de prosseguir para o pagamento.</p>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Produto</th>
+                        <th>Quantidade</th>
+                        <th>Preço Unitário</th>
+                        <th>Total</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody id="corpo-tabela-carrinho"></tbody>
+            </table>
+
+            <section id="resumo-valores">
+                <h3>Resumo do Pedido</h3>
+                <ul>
+                    <li>Subtotal: R$ 1.550,00</li>
+                    <li>Frete: R$ 0,00 (Grátis)</li>
+                    <li><strong>Total Geral: R$ 1.550,00</strong></li>
+                </ul>
+            </section>
+
+            <section id="acoes-carrinho">
+                <p><a class="secondary-link" href="catalogo-produtos.html">← Continuar comprando</a></p>
+                <p><a class="button-link" href="checkout.html">Fechar pedido e ir para o pagamento →</a></p>
+            </section>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Tech Store E-commerce. Todos os direitos reservados.</p>
+        <p>Projeto acadêmico - Disciplina de Desenvolvimento Web.</p>
+        <p>Equipe: CARLOS EDUARDO CRISTOVÃO DE MELO<br>ANTONIA BRUNA SILVA DOS SANTOS<br>FRANCISCO NUNES LOPES DA SILVA <br> RODRIGO PEREIRA OLIVEIRA</p>
+    </footer>
+
+    <script src="../js/script.js"></script>
+</body>
+</html>

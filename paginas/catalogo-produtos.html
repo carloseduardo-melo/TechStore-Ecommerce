@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catálogo de Produtos - Tech Store</title>
+    
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+    <header>
+        <h1>Tech Store</h1>
+        <p>Alta performance em eletrônicos e hardware</p>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="../index.html">Início</a></li> 
+            <li><a href="catalogo-produtos.html">Catálogo de Produtos</a></li>
+            <li><a href="carrinho.html">Meu Carrinho</a></li>
+            <li><a href="checkout.html">Finalizar Compra</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <aside>
+            <h3>Filtros</h3>
+            <p>Use a busca e os filtros dinâmicos na vitrine de produtos.</p>
+        </aside>
+
+        <section id="lista-produtos">
+            <div class="catalogo-toolbar">
+                <div>
+                    <h2>Nosso Catálogo</h2>
+                    <p>Explore todos os nossos produtos. Use a busca e os filtros para encontrar o que deseja.</p>
+                </div>
+                <div class="catalogo-status">
+                    <strong>4</strong>
+                    <span>produtos disponíveis</span>
+                </div>
+            </div>
+            <div class="catalogo-ferramentas">
+                <label class="catalogo-busca" for="catalogo-busca">
+                    <span>Buscar</span>
+                    <input id="catalogo-busca" type="search" placeholder="Procure por nome, categoria ou descrição">
+                </label>
+                <div class="catalogo-filtros" role="group" aria-label="Filtros de categoria">
+                    <button type="button" class="is-active" data-category-filter="todos">Todos</button>
+                    <button type="button" data-category-filter="hardware">Hardware</button>
+                    <button type="button" data-category-filter="monitores">Monitores</button>
+                    <button type="button" data-category-filter="periféricos">Periféricos</button>
+                </div>
+            </div>
+            <div class="catalogo-lista">
+                <article class="card-produto">
+                    <h3>Placa de Vídeo RTX 4060</h3>
+                    <p>O melhor custo-benefício para rodar tudo no Ultra.</p>
+                    <p><strong>R$ 2.500,00</strong></p>
+                    <a href="detalhes-produto.html?produto=rtx-4060">Ver detalhes</a>
+                </article>
+
+                <article class="card-produto">
+                    <h3>Headset Gamer 7.1</h3>
+                    <p>Áudio imersivo para jogos competitivos.</p>
+                    <p><strong>R$ 450,00</strong></p>
+                    <a href="detalhes-produto.html?produto=headset-71">Ver detalhes</a>
+                </article>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Tech Store E-commerce. Todos os direitos reservados.</p>
+        <p>Projeto acadêmico - Disciplina de Desenvolvimento Web.</p>
+        <p>Equipe: CARLOS EDUARDO CRISTOVÃO DE MELO<br>ANTONIA BRUNA SILVA DOS SANTOS<br>FRANCISCO NUNES LOPES DA SILVA <br> RODRIGO PEREIRA OLIVEIRA</p>
+    </footer>
+
+    <script src="../js/script.js"></script>
+</body>
+</html>
