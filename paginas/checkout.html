@@ -27,9 +27,11 @@
         <h2>Finalizar o Seu Pedido</h2>
         <p>Por favor, preencha os campos abaixo com os seus dados para concluir a compra do seu setup.</p>
 
-        <form action="#" method="POST" id="form-checkout" style="margin-top: 20px;">
+        <div id="checkout-feedback" hidden></div>
+
+        <form action="#" method="POST" id="form-checkout">
             
-            <section id="dados-pessoais" style="margin-bottom: 25px;">
+            <section id="dados-pessoais">
                 <h3>1. Dados Pessoais</h3>
                 
                 <p>
@@ -37,18 +39,18 @@
                     <input type="text" id="nome" name="nome" placeholder="Digite o seu nome completo" required>
                 </p>
                 
-                <p style="margin-top: 10px;">
+                <p>
                     <label for="email">E-mail:</label><br>
                     <input type="email" id="email" name="email" placeholder="exemplo@email.com" required>
                 </p>
 
-                <p style="margin-top: 10px;">
+                <p>
                     <label for="cpf">CPF:</label><br>
                     <input type="text" id="cpf" name="cpf" placeholder="000.000.000-00" required>
                 </p>
             </section>
 
-            <section id="endereco-entrega" style="margin-bottom: 25px;">
+            <section id="endereco-entrega">
                 <h3>2. Endereço de Entrega</h3>
                 
                 <p>
@@ -56,23 +58,23 @@
                     <input type="text" id="cep" name="cep" placeholder="00000-000" required>
                 </p>
 
-                <p style="margin-top: 10px;">
+                <p>
                     <label for="rua">Rua / Avenida:</label><br>
                     <input type="text" id="rua" name="rua" placeholder="Nome da rua ou avenida" required>
                 </p>
 
-                <p style="margin-top: 10px;">
+                <p>
                     <label for="numero">Número:</label><br>
                     <input type="text" id="numero" name="numero" placeholder="Nº" required>
                 </p>
 
-                <p style="margin-top: 10px;">
+                <p>
                     <label for="cidade">Cidade:</label><br>
                     <input type="text" id="cidade" name="cidade" placeholder="Sua cidade" required>
                 </p>
             </section>
 
-            <section id="forma-pagamento" style="margin-bottom: 25px;">
+            <section id="forma-pagamento">
                 <h3>3. Forma de Pagamento</h3>
                 <p>Selecione como deseja pagar:</p>
                 
@@ -101,8 +103,8 @@
                     <li><strong>Total a Pagar: R$ 1.550,00</strong></li>
                 </ul>
 
-                <p style="margin-top: 20px;">
-                    <button type="submit" style="font-size: 1.2em; font-weight: bold; padding: 10px 25px; background-color: #1b365d; color: white; border: none; cursor: pointer;">
+                <p>
+                    <button type="submit">
                         Finalizar Compra e Gerar Pagamento
                     </button>
                 </p>
@@ -110,7 +112,7 @@
 
         </form>
 
-        <p style="margin-top: 30px;"><a href="carrinho.html">← Voltar para o Carrinho</a></p>
+        <p><a class="secondary-link" href="carrinho.html">← Voltar para o carrinho</a></p>
     </main>
 
     <footer>

@@ -24,32 +24,49 @@
     </nav>
 
     <main>
-        <h2>Nosso Catálogo</h2>
-        <p>Explore todos os nossos produtos. Utilize os filtros abaixo para encontrar o que deseja.</p>
-
         <aside>
             <h3>Filtros</h3>
-            <ul>
-                <li>Hardware</li>
-                <li>Periféricos</li>
-                <li>Monitores</li>
-            </ul>
+            <p>Use a busca e os filtros dinâmicos na vitrine de produtos.</p>
         </aside>
 
         <section id="lista-produtos">
-            <article class="card-produto">
-                <h3>Placa de Vídeo RTX 4060</h3>
-                <p>O melhor custo-benefício para rodar tudo no Ultra.</p>
-                <p><strong>R$ 2.500,00</strong></p>
-                <a href="detalhes-produto.html">Ver detalhes</a>
-            </article>
+            <div class="catalogo-toolbar">
+                <div>
+                    <h2>Nosso Catálogo</h2>
+                    <p>Explore todos os nossos produtos. Use a busca e os filtros para encontrar o que deseja.</p>
+                </div>
+                <div class="catalogo-status">
+                    <strong>4</strong>
+                    <span>produtos disponíveis</span>
+                </div>
+            </div>
+            <div class="catalogo-ferramentas">
+                <label class="catalogo-busca" for="catalogo-busca">
+                    <span>Buscar</span>
+                    <input id="catalogo-busca" type="search" placeholder="Procure por nome, categoria ou descrição">
+                </label>
+                <div class="catalogo-filtros" role="group" aria-label="Filtros de categoria">
+                    <button type="button" class="is-active" data-category-filter="todos">Todos</button>
+                    <button type="button" data-category-filter="hardware">Hardware</button>
+                    <button type="button" data-category-filter="monitores">Monitores</button>
+                    <button type="button" data-category-filter="periféricos">Periféricos</button>
+                </div>
+            </div>
+            <div class="catalogo-lista">
+                <article class="card-produto">
+                    <h3>Placa de Vídeo RTX 4060</h3>
+                    <p>O melhor custo-benefício para rodar tudo no Ultra.</p>
+                    <p><strong>R$ 2.500,00</strong></p>
+                    <a href="detalhes-produto.html?produto=rtx-4060">Ver detalhes</a>
+                </article>
 
-            <article class="card-produto">
-                <h3>Headset Gamer 7.1</h3>
-                <p>Áudio imersivo para jogos competitivos.</p>
-                <p><strong>R$ 450,00</strong></p>
-                <a href="detalhes-produto.html">Ver detalhes</a>
-            </article>
+                <article class="card-produto">
+                    <h3>Headset Gamer 7.1</h3>
+                    <p>Áudio imersivo para jogos competitivos.</p>
+                    <p><strong>R$ 450,00</strong></p>
+                    <a href="detalhes-produto.html?produto=headset-71">Ver detalhes</a>
+                </article>
+            </div>
         </section>
     </main>
 

@@ -33,3 +33,22 @@ ecommerce/
 └── img/                         # Diretório de mídias (imagens, ícones)
     ├── teclado-placeholder.jpg
     └── monitor-placeholder.jpg
+```
+
+## 🚀 Publicação no GitHub Pages
+
+Este projeto já está organizado para funcionar como site estático no GitHub Pages, inclusive no endereço:
+
+https://carloseduardo-melo.github.io/TechStore-Ecommerce/
+
+### Passos para publicar
+
+1. Envie os arquivos para o repositório `TechStore-Ecommerce` no GitHub.
+2. No repositório, abra **Settings > Pages**.
+3. Em **Build and deployment**, selecione o branch principal do projeto, normalmente `main`.
+4. Se o GitHub pedir a pasta de publicação, use a raiz do repositório.
+5. Aguarde a atualização do link do Pages e teste a navegação pelas páginas em `paginas/`.
+
+### Observação técnica
+
+Os caminhos do projeto usam links relativos, então o site funciona corretamente quando publicado em um subcaminho como `/TechStore-Ecommerce/`.

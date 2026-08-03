@@ -28,7 +28,7 @@
             <h2>O Seu Carrinho de Compras</h2>
             <p>Confira os itens selecionados antes de prosseguir para o pagamento.</p>
 
-            <table border="1" style="width: 100%; border-collapse: collapse; margin-top: 20px; margin-bottom: 20px;">
+            <table>
                 <thead>
                     <tr>
                         <th>Produto</th>
@@ -38,22 +38,7 @@
                         <th>Ações</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr>
-                        <td>Teclado Mecânico RGB</td>
-                        <td>1</td>
-                        <td>R$ 350,00</td>
-                        <td>R$ 350,00</td>
-                        <td><a href="#">Remover</a></td>
-                    </tr>
-                    <tr>
-                        <td>Monitor Gamer 144Hz 24"</td>
-                        <td>1</td>
-                        <td>R$ 1.200,00</td>
-                        <td>R$ 1.200,00</td>
-                        <td><a href="#">Remover</a></td>
-                    </tr>
-                </tbody>
+                <tbody id="corpo-tabela-carrinho"></tbody>
             </table>
 
             <section id="resumo-valores">
@@ -65,9 +50,9 @@
                 </ul>
             </section>
 
-            <section id="acoes-carrinho" style="margin-top: 20px;">
-                <p><a href="catalogo-produtos.html">← Continuar Comprando</a></p>
-                <p><a href="checkout.html" style="font-weight: bold;">Fechar Pedido e Ir para o Pagamento →</a></p>
+            <section id="acoes-carrinho">
+                <p><a class="secondary-link" href="catalogo-produtos.html">← Continuar comprando</a></p>
+                <p><a class="button-link" href="checkout.html">Fechar pedido e ir para o pagamento →</a></p>
             </section>
         </section>
     </main>
