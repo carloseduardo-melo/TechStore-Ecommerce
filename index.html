@@ -72,6 +72,81 @@
             <p>Nas compras acima de R$ 500,00 para as regiões Nordeste e Sul.</p>
         </aside>
 
+        <section id="faq">
+            <h2>Perguntas Frequentes (FAQ)</h2>
+            <p>Clique sobre as perguntas abaixo para expandir e ver as respostas.</p>
+            <div class="faq-accordion">
+                <div class="faq-item">
+                    <button type="button" class="faq-question" aria-expanded="false">
+                        <span>Qual é o prazo de entrega dos produtos?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>O prazo médio de entrega para capitais é de 2 a 5 dias úteis. Para demais regiões, o prazo pode variar entre 5 e 10 dias úteis após a confirmação do pagamento.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button type="button" class="faq-question" aria-expanded="false">
+                        <span>Como funciona o frete grátis?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Oferecemos frete grátis em todas as compras acima de R$ 500,00 para as regiões Nordeste e Sul. O desconto do frete é aplicado automaticamente no carrinho de compras.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button type="button" class="faq-question" aria-expanded="false">
+                        <span>Os produtos possuem garantia?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Sim! Todos os nossos eletrônicos e equipamentos de hardware contam com 12 meses de garantia direta com o fabricante contra defeitos de fabricação.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="atendimento">
+            <h2>Fale Conosco / Suporte ao Cliente</h2>
+            <p>Tem alguma dúvida, sugestão ou solicitação de orçamento? Preencha o formulário abaixo para entrar em contato com a nossa equipe técnica.</p>
+
+            <div id="contato-feedback" hidden></div>
+
+            <form action="#" method="POST" id="form-contato" novalidate>
+                <p>
+                    <label for="contato-nome">Nome Completo:</label>
+                    <input type="text" id="contato-nome" name="nome" placeholder="Digite o seu nome completo" required>
+                </p>
+
+                <p>
+                    <label for="contato-email">E-mail de Contato:</label>
+                    <input type="email" id="contato-email" name="email" placeholder="seuemail@exemplo.com" required>
+                </p>
+
+                <p>
+                    <label for="contato-assunto">Assunto da Mensagem:</label>
+                    <select id="contato-assunto" name="assunto" required>
+                        <option value="">Selecione uma opção...</option>
+                        <option value="duvida">Dúvida sobre Produtos</option>
+                        <option value="orcamento">Solicitação de Orçamento</option>
+                        <option value="suporte">Suporte Técnico</option>
+                        <option value="sugestao">Sugestão ou Elogio</option>
+                    </select>
+                </p>
+
+                <p>
+                    <label for="contato-mensagem">Sua Mensagem:</label>
+                    <textarea id="contato-mensagem" name="mensagem" placeholder="Escreva a sua mensagem ou solicitação aqui..." required></textarea>
+                </p>
+
+                <p>
+                    <button type="submit" class="button-link">Enviar Mensagem</button>
+                </p>
+            </form>
+        </section>
+
     </main>
 
     <footer>
