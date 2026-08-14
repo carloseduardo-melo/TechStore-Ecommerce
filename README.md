@@ -8,7 +8,7 @@ Projeto acadêmico de desenvolvimento front-end para a disciplina de **Desenvolv
 
 - **CARLOS EDUARDO CRISTOVÃO DE MELO**
 - **ANTONIA BRUNA SILVA DOS SANTOS**
-- **FRANCISCO NUNES LOPES DA SILVA** (`nunes198` | `fransnuunes1987@gmail.com`)
+- **FRANCISCO NUNES LOPES DA SILVA**
 - **RODRIGO PEREIRA OLIVEIRA**
 
 ---
