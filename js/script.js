@@ -145,6 +145,7 @@ function sincronizarCarrinhoStorage() {
 
 function salvarCarrinho() {
     sincronizarCarrinhoStorage();
+    updateCartBadge();
 }
 
 function formatCurrency(value) {
@@ -643,65 +644,322 @@ function renderCheckoutSummary() {
     `;
 }
 
-function setupCheckoutFeedback() {
-    const feedback = document.querySelector('#checkout-feedback');
+/* ==========================================================================
+   UTILITÁRIOS DE TEMA, BADGE DO CARRINHO E INTERAÇÕES
+   ========================================================================== */
 
-    if (!feedback) {
-        return;
+function updateCartBadge() {
+    const totalItems = carrinho.reduce((total, item) => total + (item.quantidade || item.quantity || 1), 0);
+    
+    const cartNavLinks = document.querySelectorAll('nav a[href*="carrinho.html"]');
+    cartNavLinks.forEach((link) => {
+        let badge = link.querySelector('.cart-badge');
+        if (!badge) {
+            badge = document.createElement('span');
+            badge.className = 'cart-badge';
+            link.appendChild(badge);
+        }
+        badge.textContent = totalItems;
+    });
+}
+
+function setupThemeToggle() {
+    const THEME_KEY = 'techstore_theme';
+    const isDark = localStorage.getItem(THEME_KEY) === 'dark';
+
+    if (isDark) {
+        document.body.classList.add('dark-mode');
     }
 
+    const navUl = document.querySelector('nav ul');
+    if (navUl && !document.querySelector('.theme-toggle-btn')) {
+        const li = document.createElement('li');
+        const button = document.createElement('button');
+        button.type = 'button';
+        button.className = 'theme-toggle-btn';
+        button.setAttribute('aria-label', 'Alternar tema claro e escuro');
+        button.innerHTML = isDark ? '<span>☀️ Modo Claro</span>' : '<span>🌙 Modo Escuro</span>';
+        
+        button.addEventListener('click', () => {
+            const nowDark = document.body.classList.toggle('dark-mode');
+            localStorage.setItem(THEME_KEY, nowDark ? 'dark' : 'light');
+            button.innerHTML = nowDark ? '<span>☀️ Modo Claro</span>' : '<span>🌙 Modo Escuro</span>';
+        });
+
+        li.appendChild(button);
+        navUl.appendChild(li);
+    }
+}
+
+/* ==========================================================================
+   MÁSCARAS E VALIDAÇÕES DE FORMULÁRIO INLINE
+   ========================================================================== */
+
+function applyCpfMask(input) {
+    let v = input.value.replace(/\D/g, '').slice(0, 11);
+    v = v.replace(/(\d{3})(\d)/, '$1.$2');
+    v = v.replace(/(\d{3})(\d)/, '$1.$2');
+    v = v.replace(/(\d{3})(\d{1,2})$/, '$1-$2');
+    input.value = v;
+}
+
+function applyCepMask(input) {
+    let v = input.value.replace(/\D/g, '').slice(0, 8);
+    v = v.replace(/^(\d{5})(\d)/, '$1-$2');
+    input.value = v;
+}
+
+function showFieldError(input, message) {
+    if (!input) return;
+    input.classList.add('is-invalid');
+    let parent = input.parentElement;
+    let errorSpan = parent.querySelector('.field-error-message');
+
+    if (!errorSpan) {
+        errorSpan = document.createElement('span');
+        errorSpan.className = 'field-error-message';
+        parent.appendChild(errorSpan);
+    }
+    errorSpan.textContent = message;
+}
+
+function clearFieldError(input) {
+    if (!input) return;
+    input.classList.remove('is-invalid');
+    const parent = input.parentElement;
+    const errorSpan = parent.querySelector('.field-error-message');
+    if (errorSpan) {
+        errorSpan.remove();
+    }
+}
+
+function setupCheckoutFeedback() {
+    const feedback = document.querySelector('#checkout-feedback');
+    if (!feedback) return;
     feedback.innerHTML = '';
     feedback.hidden = true;
 }
 
-function showCheckoutFeedback(message) {
+function showCheckoutFeedback(message, type = 'success') {
     const feedback = document.querySelector('#checkout-feedback');
-
-    if (!feedback) {
-        return;
-    }
-
+    if (!feedback) return;
     feedback.hidden = false;
-    feedback.innerHTML = `<div class="checkout-feedback success">${message}</div>`;
+    feedback.innerHTML = `<div class="feedback-banner ${type}">${message}</div>`;
+    feedback.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 }
 
 function validateCheckoutForm(form) {
-    const requiredFields = [
-        { element: form.querySelector('#nome'), message: 'Informe o nome completo.' },
-        { element: form.querySelector('#email'), message: 'Informe um e-mail válido.' },
-        { element: form.querySelector('#cpf'), message: 'Informe um CPF válido.' },
-        { element: form.querySelector('#cep'), message: 'Informe um CEP válido.' },
-        { element: form.querySelector('#rua'), message: 'Informe a rua ou avenida.' },
-        { element: form.querySelector('#numero'), message: 'Informe o número.' },
-        { element: form.querySelector('#cidade'), message: 'Informe a cidade.' },
-    ];
+    let isValid = true;
+    let firstInvalid = null;
 
-    let firstInvalidField = null;
-
-    requiredFields.forEach(({ element, message }) => {
-        if (!element) {
-            return;
-        }
-
-        element.setCustomValidity('');
-
-        const value = element.value.trim();
-        const invalidEmail = element.type === 'email' && value && !element.checkValidity();
-        const invalidCpf = element.id === 'cpf' && !/^\d{3}\.\d{3}\.\d{3}-\d{2}$/.test(value);
-        const invalidCep = element.id === 'cep' && !/^\d{5}-\d{3}$/.test(value);
-
-        if (!value || invalidEmail || invalidCpf || invalidCep) {
-            element.setCustomValidity(message);
-            firstInvalidField = firstInvalidField || element;
-        }
-    });
-
-    if (firstInvalidField) {
-        firstInvalidField.reportValidity();
+    if (!carrinho || carrinho.length === 0) {
+        showCheckoutFeedback('Seu carrinho está vazio. Adicione pelo menos um produto antes de finalizar a compra.', 'error');
         return false;
     }
 
-    return true;
+    const fields = [
+        {
+            element: form.querySelector('#nome'),
+            validate: (val) => val.trim().length >= 3,
+            message: 'Por favor, informe seu nome completo (mínimo 3 caracteres).'
+        },
+        {
+            element: form.querySelector('#email'),
+            validate: (val) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val.trim()),
+            message: 'Por favor, informe um endereço de e-mail válido.'
+        },
+        {
+            element: form.querySelector('#cpf'),
+            validate: (val) => /^\d{3}\.\d{3}\.\d{3}-\d{2}$/.test(val.trim()),
+            message: 'Por favor, informe um CPF válido no formato 000.000.000-00.'
+        },
+        {
+            element: form.querySelector('#cep'),
+            validate: (val) => /^\d{5}-\d{3}$/.test(val.trim()),
+            message: 'Por favor, informe um CEP válido no formato 00000-000.'
+        },
+        {
+            element: form.querySelector('#rua'),
+            validate: (val) => val.trim().length >= 2,
+            message: 'Por favor, informe o nome da rua ou avenida.'
+        },
+        {
+            element: form.querySelector('#numero'),
+            validate: (val) => val.trim().length >= 1,
+            message: 'Por favor, informe o número da residência.'
+        },
+        {
+            element: form.querySelector('#cidade'),
+            validate: (val) => val.trim().length >= 2,
+            message: 'Por favor, informe o nome da sua cidade.'
+        }
+    ];
+
+    fields.forEach(({ element, validate, message }) => {
+        if (!element) return;
+        const valid = validate(element.value);
+        if (!valid) {
+            showFieldError(element, message);
+            isValid = false;
+            if (!firstInvalid) firstInvalid = element;
+        } else {
+            clearFieldError(element);
+        }
+    });
+
+    if (firstInvalid) {
+        firstInvalid.focus();
+    }
+
+    return isValid;
+}
+
+function setupCheckoutForm() {
+    const checkoutForm = document.querySelector('#form-checkout');
+    if (!checkoutForm) return;
+
+    setupCheckoutFeedback();
+
+    const cpfInput = checkoutForm.querySelector('#cpf');
+    const cepInput = checkoutForm.querySelector('#cep');
+
+    if (cpfInput) {
+        cpfInput.addEventListener('input', () => {
+            applyCpfMask(cpfInput);
+            clearFieldError(cpfInput);
+        });
+    }
+
+    if (cepInput) {
+        cepInput.addEventListener('input', () => {
+            applyCepMask(cepInput);
+            clearFieldError(cepInput);
+        });
+    }
+
+    checkoutForm.querySelectorAll('input').forEach((input) => {
+        input.addEventListener('input', () => clearFieldError(input));
+    });
+
+    checkoutForm.addEventListener('submit', (event) => {
+        event.preventDefault();
+
+        if (!validateCheckoutForm(checkoutForm)) {
+            return;
+        }
+
+        const nameField = document.querySelector('#nome');
+        const customerName = nameField && nameField.value.trim() ? nameField.value.trim().split(' ')[0] : 'Cliente';
+
+        saveCart([]);
+        checkoutForm.reset();
+        renderCheckoutSummary();
+        showCheckoutFeedback(`Sucesso! Pedido confirmado para ${customerName}. O comprovante da simulação foi gerado e enviado para o seu e-mail.`, 'success');
+    });
+}
+
+/* ==========================================================================
+   FORMULÁRIO DE CONTATO / SUPORTE AO CLIENTE
+   ========================================================================== */
+
+function setupContactForm() {
+    const contactForm = document.querySelector('#form-contato');
+    if (!contactForm) return;
+
+    contactForm.querySelectorAll('input, select, textarea').forEach((el) => {
+        el.addEventListener('input', () => clearFieldError(el));
+        el.addEventListener('change', () => clearFieldError(el));
+    });
+
+    contactForm.addEventListener('submit', (event) => {
+        event.preventDefault();
+
+        let isValid = true;
+        let firstInvalid = null;
+
+        const nome = contactForm.querySelector('#contato-nome');
+        const email = contactForm.querySelector('#contato-email');
+        const assunto = contactForm.querySelector('#contato-assunto');
+        const mensagem = contactForm.querySelector('#contato-mensagem');
+
+        if (nome && nome.value.trim().length < 3) {
+            showFieldError(nome, 'Por favor, insira o seu nome completo (mínimo 3 caracteres).');
+            isValid = false;
+            firstInvalid = firstInvalid || nome;
+        } else {
+            clearFieldError(nome);
+        }
+
+        if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value.trim())) {
+            showFieldError(email, 'Por favor, insira um endereço de e-mail válido.');
+            isValid = false;
+            firstInvalid = firstInvalid || email;
+        } else {
+            clearFieldError(email);
+        }
+
+        if (assunto && !assunto.value) {
+            showFieldError(assunto, 'Por favor, selecione um assunto.');
+            isValid = false;
+            firstInvalid = firstInvalid || assunto;
+        } else {
+            clearFieldError(assunto);
+        }
+
+        if (mensagem && mensagem.value.trim().length < 10) {
+            showFieldError(mensagem, 'Por favor, escreva uma mensagem com no mínimo 10 caracteres.');
+            isValid = false;
+            firstInvalid = firstInvalid || mensagem;
+        } else {
+            clearFieldError(mensagem);
+        }
+
+        if (!isValid) {
+            if (firstInvalid) firstInvalid.focus();
+            return;
+        }
+
+        const feedbackEl = document.querySelector('#contato-feedback');
+        if (feedbackEl) {
+            feedbackEl.hidden = false;
+            feedbackEl.innerHTML = `
+                <div class="feedback-banner success">
+                    Obrigado, ${nome.value.trim().split(' ')[0]}! Sua mensagem sobre "${assunto.options[assunto.selectedIndex].text}" foi recebida com sucesso. Responderemos em breve.
+                </div>
+            `;
+            feedbackEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
+        contactForm.reset();
+    });
+}
+
+/* ==========================================================================
+   FAQ ACCORDION (INTERAÇÃO JAVASCRIPT)
+   ========================================================================== */
+
+function setupFaqAccordion() {
+    const faqQuestions = document.querySelectorAll('.faq-question');
+
+    faqQuestions.forEach((button) => {
+        button.addEventListener('click', () => {
+            const item = button.closest('.faq-item');
+            if (!item) return;
+
+            const isOpen = item.classList.contains('is-open');
+
+            document.querySelectorAll('.faq-item').forEach((otherItem) => {
+                otherItem.classList.remove('is-open');
+                const q = otherItem.querySelector('.faq-question');
+                if (q) q.setAttribute('aria-expanded', 'false');
+            });
+
+            if (!isOpen) {
+                item.classList.add('is-open');
+                button.setAttribute('aria-expanded', 'true');
+            }
+        });
+    });
 }
 
 function setupNavigationState() {
@@ -716,40 +974,16 @@ function setupNavigationState() {
     });
 }
 
-function setupCheckoutForm() {
-    const checkoutForm = document.querySelector('#form-checkout');
-
-    if (!checkoutForm) {
-        return;
-    }
-
-    setupCheckoutFeedback();
-
-    checkoutForm.addEventListener('submit', (event) => {
-        if (!validateCheckoutForm(checkoutForm)) {
-            return;
-        }
-
-        event.preventDefault();
-
-        const nameField = document.querySelector('#nome');
-        const customerName = nameField && nameField.value.trim() ? nameField.value.trim().split(' ')[0] : 'Cliente';
-
-        window.alert(`Pedido recebido, ${customerName}. A simulação de pagamento foi preparada com sucesso.`);
-        saveCart([]);
-        checkoutForm.reset();
-        renderCheckoutSummary();
-        showCheckoutFeedback(`Pedido confirmado para ${customerName}. A loja gerou a simulação de pagamento com sucesso.`);
-    });
-}
-
 document.addEventListener('DOMContentLoaded', () => {
     setupNavigationState();
+    setupThemeToggle();
+    updateCartBadge();
     renderHomeProducts();
     renderCatalogProducts();
     renderProductDetails();
     renderCart();
     renderCheckoutSummary();
     setupCheckoutForm();
-
+    setupContactForm();
+    setupFaqAccordion();
 });

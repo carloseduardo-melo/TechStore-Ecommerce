@@ -29,6 +29,11 @@
     box-sizing: border-box;
 }
 
+html, body {
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
 html {
     scroll-behavior: smooth;
 }
@@ -876,6 +881,7 @@ footer {
     backdrop-filter: blur(18px) saturate(140%);
     box-shadow: var(--shadow-soft);
     color: var(--muted);
+    text-align: center;
 }
 
 footer p + p {
@@ -1123,4 +1129,404 @@ footer p + p {
     footer {
         text-align: center;
     }
+}
+
+/* ==========================================================================
+   MODO ESCURO (DARK MODE) & COMPONENTES ADICIONAIS DA ENTREGA FINAL
+   ========================================================================== */
+
+body.dark-mode {
+    --bg: #090d16;
+    --surface: rgba(15, 23, 42, 0.92);
+    --surface-strong: #0f172a;
+    --surface-soft: rgba(30, 41, 59, 0.85);
+    --text: #f8fafc;
+    --muted: #94a3b8;
+    --primary: #ffffff;
+    --primary-strong: #0ea5a8;
+    --border: rgba(255, 255, 255, 0.15);
+    --border-strong: rgba(255, 255, 255, 0.25);
+    --shadow: 0 24px 60px rgba(0, 0, 0, 0.6);
+    --shadow-soft: 0 12px 28px rgba(0, 0, 0, 0.4);
+}
+
+body.dark-mode body::before {
+    opacity: 0.15;
+}
+
+body.dark-mode body > nav {
+    background: rgba(15, 23, 42, 0.88);
+    border-color: rgba(255, 255, 255, 0.15);
+}
+
+body.dark-mode body > nav a {
+    color: #cbd5e1;
+}
+
+body.dark-mode body > nav a:hover,
+body.dark-mode body > nav a:focus-visible,
+body.dark-mode body > nav a[aria-current='page'] {
+    color: #ffffff;
+    background: linear-gradient(135deg, #0ea5a8 0%, #056f75 100%);
+    box-shadow: 0 10px 24px rgba(14, 165, 168, 0.35);
+}
+
+body.dark-mode .card-produto {
+    background: linear-gradient(180deg, rgba(30, 41, 59, 0.92) 0%, rgba(15, 23, 42, 0.96) 100%);
+    border-color: rgba(255, 255, 255, 0.14);
+}
+
+body.dark-mode .card-produto h3 {
+    color: #ffffff;
+}
+
+body.dark-mode .card-produto img {
+    background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+}
+
+body.dark-mode #categorias li {
+    background: linear-gradient(180deg, #1e293b 0%, #0f172a 100%);
+    border-color: rgba(255, 255, 255, 0.12);
+    color: #f8fafc;
+}
+
+/* CORREÇÃO DE ESPECIFICIDADE: VISIBILIDADE DOS CAMPOS AO DIGITAR NO MODO ESCURO */
+body.dark-mode input[type='text'],
+body.dark-mode input[type='email'],
+body.dark-mode input[type='search'],
+body.dark-mode select,
+body.dark-mode textarea,
+body.dark-mode #form-checkout input[type='text'],
+body.dark-mode #form-checkout input[type='email'],
+body.dark-mode #form-contato input[type='text'],
+body.dark-mode #form-contato input[type='email'],
+body.dark-mode #form-contato select,
+body.dark-mode #form-contato textarea,
+body.dark-mode #catalogo-busca {
+    background-color: #1e293b !important;
+    color: #ffffff !important;
+    border-color: rgba(255, 255, 255, 0.22) !important;
+    caret-color: #0ea5a8;
+}
+
+body.dark-mode select option {
+    background-color: #1e293b !important;
+    color: #ffffff !important;
+}
+
+body.dark-mode input[type='text']::placeholder,
+body.dark-mode input[type='email']::placeholder,
+body.dark-mode input[type='search']::placeholder,
+body.dark-mode textarea::placeholder,
+body.dark-mode #form-checkout input::placeholder,
+body.dark-mode #form-contato input::placeholder,
+body.dark-mode #form-contato textarea::placeholder {
+    color: #94a3b8 !important;
+    opacity: 1;
+}
+
+body.dark-mode input:focus,
+body.dark-mode select:focus,
+body.dark-mode textarea:focus,
+body.dark-mode #form-checkout input:focus,
+body.dark-mode #form-contato input:focus,
+body.dark-mode #form-contato textarea:focus {
+    border-color: #0ea5a8 !important;
+    box-shadow: 0 0 0 4px rgba(14, 165, 168, 0.28) !important;
+    outline: none !important;
+}
+
+body.dark-mode label,
+body.dark-mode #form-checkout label,
+body.dark-mode #form-contato label,
+body.dark-mode #forma-pagamento label,
+body.dark-mode #forma-pagamento p {
+    color: #f8fafc !important;
+}
+
+/* CORREÇÃO DAS SEÇÕES DE CHECKOUT, RESUMO DE VALORES E CONFIRMAR VALORES NO MODO ESCURO */
+body.dark-mode #form-checkout > section,
+body.dark-mode #resumo-valores,
+body.dark-mode #revisao-final,
+body.dark-mode #acoes-carrinho,
+body.dark-mode #compra-produto,
+body.dark-mode #produto-detalhado > section,
+body.dark-mode main > section,
+body.dark-mode main > aside,
+body.dark-mode main > form {
+    background: linear-gradient(180deg, rgba(30, 41, 59, 0.95) 0%, rgba(15, 23, 42, 0.98) 100%) !important;
+    border-color: rgba(255, 255, 255, 0.15) !important;
+    color: #f8fafc !important;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4) !important;
+}
+
+body.dark-mode #form-checkout h2,
+body.dark-mode #form-checkout h3,
+body.dark-mode #resumo-valores h3,
+body.dark-mode #revisao-final h3,
+body.dark-mode #forma-pagamento h3,
+body.dark-mode #dados-pessoais h3,
+body.dark-mode #endereco-entrega h3,
+body.dark-mode aside h3 {
+    color: #ffffff !important;
+}
+
+body.dark-mode #revisao-final li,
+body.dark-mode #resumo-valores li,
+body.dark-mode #acoes-carrinho p,
+body.dark-mode #forma-pagamento p {
+    color: #e2e8f0 !important;
+}
+
+body.dark-mode #revisao-final strong,
+body.dark-mode #resumo-valores strong,
+body.dark-mode #compra-produto strong {
+    color: #0ea5a8 !important;
+}
+
+body.dark-mode #conteudo-carrinho table {
+    background: rgba(15, 23, 42, 0.92);
+    border-color: rgba(255, 255, 255, 0.12);
+}
+
+body.dark-mode #conteudo-carrinho tbody tr:hover {
+    background: rgba(14, 165, 168, 0.14);
+}
+
+body.dark-mode .cart-qty {
+    background: #1e293b;
+    border-color: rgba(255, 255, 255, 0.18);
+}
+
+body.dark-mode .cart-qty span {
+    color: #ffffff;
+}
+
+body.dark-mode .cart-empty-state {
+    background: #1e293b;
+    border-color: rgba(255, 255, 255, 0.18);
+    color: #cbd5e1;
+}
+
+body.dark-mode footer {
+    background: rgba(15, 23, 42, 0.85);
+    border-color: rgba(255, 255, 255, 0.12);
+}
+
+body.dark-mode .catalogo-status,
+body.dark-mode .catalogo-filtros button {
+    background: #1e293b;
+    color: #ffffff;
+    border-color: rgba(255, 255, 255, 0.15);
+}
+
+body.dark-mode .catalogo-status strong {
+    color: #0ea5a8;
+}
+
+/* Badge do Carrinho */
+.cart-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 22px;
+    height: 22px;
+    padding: 0 6px;
+    margin-left: 6px;
+    border-radius: 999px;
+    background: #0ea5a8;
+    color: #ffffff;
+    font-size: 0.78rem;
+    font-weight: 800;
+    line-height: 1;
+    box-shadow: 0 4px 10px rgba(14, 165, 168, 0.4);
+    transition: transform 180ms ease, background-color 180ms ease;
+}
+
+body > nav a:hover .cart-badge,
+body > nav a[aria-current='page'] .cart-badge {
+    background: #ffffff;
+    color: #0f172a;
+}
+
+/* Botão de Alternar Tema (Dark/Light) */
+.theme-toggle-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    min-height: 42px;
+    padding: 10px 16px;
+    border: 1px solid rgba(16, 32, 51, 0.12);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.85);
+    color: var(--text);
+    font-family: inherit;
+    font-weight: 800;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: transform 180ms ease, background-color 180ms ease, box-shadow 180ms ease;
+}
+
+body.dark-mode .theme-toggle-btn {
+    background: #1e293b;
+    color: #f8fafc;
+    border-color: rgba(255, 255, 255, 0.18);
+}
+
+.theme-toggle-btn:hover,
+.theme-toggle-btn:focus-visible {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 18px rgba(16, 32, 51, 0.12);
+    border-color: var(--accent);
+}
+
+/* Formatações de Formulários Adicionais (Contato/Atendimento) */
+#form-contato {
+    display: grid;
+    gap: 18px;
+}
+
+#form-contato label {
+    display: block;
+    font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 6px;
+}
+
+#form-contato input[type='text'],
+#form-contato input[type='email'],
+#form-contato select,
+#form-contato textarea {
+    width: 100%;
+    padding: 14px 16px;
+    border: 1px solid rgba(16, 32, 51, 0.16);
+    border-radius: 14px;
+    background: #fff;
+    color: var(--text);
+    font: inherit;
+    transition: border-color 180ms ease, box-shadow 180ms ease;
+}
+
+#form-contato textarea {
+    min-height: 120px;
+    resize: vertical;
+}
+
+#form-contato input:focus,
+#form-contato select:focus,
+#form-contato textarea:focus {
+    border-color: rgba(14, 165, 168, 0.5);
+    box-shadow: 0 0 0 4px rgba(14, 165, 168, 0.12);
+    outline: none;
+}
+
+/* Validações Inline e Mensagens de Erro/Sucesso */
+.field-error-message {
+    display: block;
+    margin-top: 6px;
+    font-size: 0.86rem;
+    font-weight: 700;
+    color: #dc2626;
+    animation: fade-up 200ms ease both;
+}
+
+input.is-invalid,
+select.is-invalid,
+textarea.is-invalid {
+    border-color: #dc2626 !important;
+    background-color: rgba(220, 38, 38, 0.03) !important;
+    box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.15) !important;
+}
+
+.feedback-banner {
+    padding: 16px 20px;
+    margin-bottom: 16px;
+    border-radius: 16px;
+    font-weight: 700;
+    animation: fade-up 300ms ease both;
+}
+
+.feedback-banner.success {
+    background: linear-gradient(135deg, rgba(14, 165, 168, 0.18), rgba(14, 165, 168, 0.08));
+    border: 1px solid rgba(14, 165, 168, 0.35);
+    color: var(--accent-strong);
+}
+
+body.dark-mode .feedback-banner.success {
+    color: #2dd4bf;
+    background: rgba(14, 165, 168, 0.2);
+}
+
+.feedback-banner.error {
+    background: rgba(220, 38, 38, 0.1);
+    border: 1px solid rgba(220, 38, 38, 0.3);
+    color: #dc2626;
+}
+
+/* FAQ Accordion (Interação JavaScript) */
+.faq-accordion {
+    display: grid;
+    gap: 12px;
+    margin-top: 16px;
+}
+
+.faq-item {
+    border: 1px solid rgba(16, 32, 51, 0.12);
+    border-radius: var(--radius-md);
+    background: linear-gradient(180deg, #ffffff 0%, var(--surface-soft) 100%);
+    overflow: hidden;
+    transition: border-color 200ms ease, box-shadow 200ms ease;
+}
+
+body.dark-mode .faq-item {
+    background: linear-gradient(180deg, #1e293b 0%, #0f172a 100%);
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+.faq-item.is-open {
+    border-color: var(--accent);
+    box-shadow: var(--shadow-soft);
+}
+
+.faq-question {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 22px;
+    border: 0;
+    background: transparent;
+    color: var(--primary);
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.05rem;
+    font-weight: 700;
+    text-align: left;
+    cursor: pointer;
+}
+
+body.dark-mode .faq-question {
+    color: #f8fafc;
+}
+
+.faq-icon {
+    font-size: 1.3rem;
+    line-height: 1;
+    transition: transform 220ms ease;
+    color: var(--accent);
+}
+
+.faq-item.is-open .faq-icon {
+    transform: rotate(45deg);
+}
+
+.faq-answer {
+    display: none;
+    padding: 0 22px 20px;
+    color: var(--muted);
+    line-height: 1.6;
+    animation: fade-up 200ms ease both;
+}
+
+.faq-item.is-open .faq-answer {
+    display: block;
 }

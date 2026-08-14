@@ -1,54 +1,77 @@
-# Tech Store E-commerce
+# Tech Store E-commerce - Entrega Final do Projeto Web
 
-Projeto acadêmico de desenvolvimento front-end para a disciplina de Desenvolvimento Web. A plataforma consiste no desenvolvimento da plataforma Tech Store, um e-commerce especializado na venda de eletrônicos, periféricos de alta performance e componentes de hardware, utilizando dados completamente simulados.
+Projeto acadêmico de desenvolvimento front-end para a disciplina de Desenvolvimento Web. A plataforma consiste no desenvolvimento da **Tech Store**, um e-commerce completo e responsivo especializado na venda de eletrônicos, periféricos de alta performance e componentes de hardware, utilizando dados dinâmicos simulados em JavaScript.
 
-## 📌 Sobre esta Entrega: Fase 1
+---
 
-O objetivo desta etapa inicial é organizar corretamente a arquitetura de arquivos e pastas do projeto e desenvolver o esqueleto básico da interface utilizando HTML5 semântico. 
+## 👥 Equipe do Projeto
 
-Neste momento, a aplicação não conta com identidade visual refinada, design responsivo ou lógicas de interatividade. O foco é garantir uma base estrutural sólida para as implementações futuras (CSS e JavaScript).
+- **CARLOS EDUARDO CRISTOVÃO DE MELO**
+- **ANTONIA BRUNA SILVA DOS SANTOS**
+- **FRANCISCO NUNES LOPES DA SILVA**
+- **RODRIGO PEREIRA OLIVEIRA**
 
-### O que foi implementado nesta fase:
-* **Estrutura de Diretórios:** Pastas separadas de forma lógica para páginas, estilos, scripts e imagens.
-* **Marcação Semântica (HTML5):** Utilização correta de tags como `<header>`, `<nav>`, `<main>`, `<section>`, `<article>`, `<aside>` e `<footer>`.
-* **Caminhos Relativos:** Navegação funcional entre as páginas criadas utilizando caminhos de diretório corretos.
-* **Organização de Código:** Código devidamente indentado e padronização de nomenclatura de arquivos (letras minúsculas, sem espaços ou acentos).
-
-## 📁 Estrutura de Pastas e Arquivos
-
-A árvore do projeto foi organizada da seguinte maneira:
-
-```text
-ecommerce/
-├── index.html                   # Página inicial da loja
-├── paginas/                     # Diretório contendo as páginas secundárias
-│   ├── catalogo-produtos.html
-│   ├── detalhes-produto.html
-│   ├── carrinho.html
-│   └── checkout.html
-├── css/                         # Diretório de folhas de estilo
-│   └── style.css                # Arquivo inicial de estilos (Reset CSS provisório)
-├── js/                          # Diretório de scripts
-│   └── script.js                # Arquivo inicial de lógica do cliente
-└── img/                         # Diretório de mídias (imagens, ícones)
-    ├── teclado-placeholder.jpg
-    └── monitor-placeholder.jpg
-```
+---
 
 ## 🚀 Publicação no GitHub Pages
 
-Este projeto já está organizado para funcionar como site estático no GitHub Pages, inclusive no endereço:
+O projeto pode ser acessado publicamente no endereço:
 
-https://carloseduardo-melo.github.io/TechStore-Ecommerce/
+👉 **[https://carloseduardo-melo.github.io/TechStore-Ecommerce/](https://carloseduardo-melo.github.io/TechStore-Ecommerce/)**
 
-### Passos para publicar
+---
 
-1. Envie os arquivos para o repositório `TechStore-Ecommerce` no GitHub.
-2. No repositório, abra **Settings > Pages**.
-3. Em **Build and deployment**, selecione o branch principal do projeto, normalmente `main`.
-4. Se o GitHub pedir a pasta de publicação, use a raiz do repositório.
-5. Aguarde a atualização do link do Pages e teste a navegação pelas páginas em `paginas/`.
+## 📌 Sobre a Entrega Final
 
-### Observação técnica
+Nesta etapa final, o projeto foi totalmente concluído, revisado e aprimorado com formulários funcionais, validações dinâmicas em JavaScript, mensagens de feedback visual e recursos de interatividade adicionais.
 
-Os caminhos do projeto usam links relativos, então o site funciona corretamente quando publicado em um subcaminho como `/TechStore-Ecommerce/`.
+### 🌟 O que foi implementado e entregue:
+
+#### 1. Formulários Funcionais & Validações em JavaScript
+* **Formulário de Atendimento / Suporte ao Cliente (`index.html`)**:
+  * Campos: Nome Completo (texto), E-mail (e-mail), Assunto (seleção `<select>`) e Mensagem (área de texto `<textarea>`).
+  * Todos os campos possuem rótulos `<label>` devidamente associados.
+  * Validação inline em tempo real via JavaScript: exibe mensagens estilizadas de erro abaixo de cada campo inválido.
+  * Banner visual de confirmação de envio sem uso de popups nativos (`window.alert`).
+* **Formulário de Checkout (`checkout.html`)**:
+  * Validação de campos de dados pessoais, endereço e pagamento.
+  * Auto-máscara dinâmica para CPF (`000.000.000-00`) e CEP (`00000-000`).
+  * Verificação e bloqueio caso o carrinho esteja vazio com mensagem de instrução.
+
+#### 2. Interações Adicionais em JavaScript
+* **Alternador de Tema Claro / Escuro (Dark/Light Mode)**:
+  * Botão de alternância no menu de navegação em todas as páginas com ícones e persistência no `localStorage`.
+* **Badge Contador de Itens no Carrinho**:
+  * Indicador numérico dinâmico no link "Meu Carrinho" da barra de navegação, atualizado instantaneamente ao adicionar/remover produtos.
+* **Perguntas Frequentes Interativas (FAQ Accordion)**:
+  * Seção sanfonada em `index.html` com alternância de expansão e recolhimento de respostas via JavaScript.
+* **Filtros e Busca em Tempo Real**:
+  * Filtro por categoria (Hardware, Monitores, Periféricos) e campo de busca por palavra-chave na página de catálogo.
+* **Gerenciamento do Carrinho de Compras**:
+  * Alteração de quantidades de produtos, cálculo automático de subtotal, regra de frete grátis (acima de R$ 500) e limpeza de carrinho.
+
+#### 3. Qualidade Visual, Responsividade e Acessibilidade
+* **Estrutura HTML5 Semântica**: `<header>`, `<nav>`, `<main>`, `<section>`, `<article>`, `<aside>` e `<footer>`.
+* **Design System CSS**: Variáveis CSS, glassmorphism (`backdrop-filter`), animações fluidas (`@keyframes`) e tipografia moderna (`Space Grotesk` e `Manrope`).
+* **Design Responsivo**: Adaptado para mobile, tablet e desktop sem rolagem horizontal indesejada (`overflow-x`).
+* **Acessibilidade**: Atributos `aria-current="page"`, `aria-expanded`, `aria-label`, `loading="lazy"` e suporte a `@media (prefers-reduced-motion: reduce)`.
+
+---
+
+## 📁 Estrutura de Pastas e Arquivos
+
+```text
+TechStore-Ecommerce/
+├── index.html                   # Página inicial (Banner, Categorias, Destaques, FAQ e Contato)
+├── README.md                    # Documentação oficial do projeto
+├── css/
+│   └── style.css                # Estilos globais, tema claro/escuro, responsividade e componentes
+├── js/
+│   └── script.js                # Lógica centralizada, validações, tema, carrinho e FAQ
+├── paginas/
+│   ├── catalogo-produtos.html   # Catálogo completo com busca e filtros
+│   ├── detalhes-produto.html    # Galeria e especificações do produto
+│   ├── carrinho.html            # Gerenciamento de itens e resumo de valores
+│   └── checkout.html            # Formulário de endereço, pagamento e finalização
+└── img/                         # Imagens promocionais e mídias
+```
